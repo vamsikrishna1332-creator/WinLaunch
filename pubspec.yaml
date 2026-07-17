@@ -90,7 +90,7 @@ dependencies:
   
   # Web view (for HTML widgets)
   webview_flutter: ^4.4.4
-  webview_flutter_windows: ^0.2.3
+  webview_flutter_windows: any
   
   # HTTP (for optional weather)
   http: ^1.2.0
