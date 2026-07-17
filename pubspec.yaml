@@ -87,11 +87,11 @@ dependencies:
 
   # Markdown (for notes)
   flutter_markdown: ^0.6.18
-
+  
   # Web view (for HTML widgets)
   webview_flutter: ^4.4.4
-  webview_windows: ^0.2.4
-
+  webview_flutter_windows: ^0.2.3
+  
   # HTTP (for optional weather)
   http: ^1.2.0
 
