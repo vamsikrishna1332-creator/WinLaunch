@@ -1,0 +1,133 @@
+name: launchdesk
+description: LaunchDesk - Professional Windows Productivity Launcher
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Windows 11 UI
+  fluent_ui: ^4.8.6
+
+  # State management
+  flutter_riverpod: ^2.4.10
+  riverpod_annotation: ^2.3.4
+
+  # Database
+  sqflite_common_ffi: ^2.3.2
+  sqflite: ^2.3.2
+  drift: ^2.14.1
+  sqlite3_flutter_libs: ^0.5.18
+
+  # JSON / Config
+  json_annotation: ^4.8.1
+  shared_preferences: ^2.2.2
+
+  # Window management
+  window_manager: ^0.3.7
+
+  # System info
+  system_info2: ^3.0.2
+  battery_plus: ^5.0.3
+  connectivity_plus: ^5.0.2
+  disk_space_plus: ^3.0.0
+
+  # File operations
+  file_picker: ^6.1.1
+  path_provider: ^2.1.2
+  path: ^1.8.3
+
+  # Animations
+  flutter_animate: ^4.5.0
+  animated_background: ^2.0.0
+  lottie: ^3.1.0
+
+  # Drag & drop / Reorder
+  reorderable_grid: ^1.2.2
+
+  # Image handling
+  cached_network_image: ^3.3.1
+  image_picker: ^1.0.7
+  flutter_svg: ^2.0.9
+
+  # URL / App launching
+  url_launcher: ^6.2.4
+
+  # Notifications
+  local_notifier: ^0.1.5
+
+  # Time / Date
+  intl: ^0.19.0
+  jiffy: ^6.3.1
+
+  # Math / Utils
+  uuid: ^4.3.3
+  collection: ^1.18.0
+  equatable: ^2.0.5
+  rxdart: ^0.27.7
+
+  # Icons
+  fluentui_system_icons: ^1.1.225
+
+  # Hotkeys
+  hotkey_manager: ^0.2.1
+
+  # Glassmorphism
+  glassmorphism: ^3.0.0
+
+  # Color picker
+  flex_color_picker: ^3.3.0
+
+  # Charts (for stats)
+  fl_chart: ^0.67.0
+
+  # Markdown (for notes)
+  flutter_markdown: ^0.6.18
+
+  # Web view (for HTML widgets)
+  webview_flutter: ^4.4.4
+  webview_flutter_win32: ^0.2.2+1
+
+  # HTTP (for optional weather)
+  http: ^1.2.0
+
+  # Timezone
+  timezone: ^0.9.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.8
+  json_serializable: ^6.7.1
+  riverpod_generator: ^2.3.9
+  drift_dev: ^2.14.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/config/
+    - assets/icons/
+    - assets/themes/
+    - assets/fonts/
+
+  # OPTIONAL FONTS — uncomment and add font files to assets/fonts/ before building.
+  # On Windows, Segoe UI is already a system font so this is not required.
+  # To bundle fonts: copy from C:\Windows\Fonts\ and rename as shown below,
+  # then uncomment the block.
+  #
+  # fonts:
+  #   - family: Segoe UI
+  #     fonts:
+  #       - asset: assets/fonts/SegoeUI.ttf
+  #       - asset: assets/fonts/SegoeUI-Bold.ttf
+  #         weight: 700
+  #       - asset: assets/fonts/SegoeUI-Italic.ttf
+  #         style: italic
+  #   - family: Cascadia Code
+  #     fonts:
+  #       - asset: assets/fonts/CascadiaCode.ttf
