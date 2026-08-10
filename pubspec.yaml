@@ -34,7 +34,7 @@ dependencies:
   system_info2: ^3.0.2
   battery_plus: ^5.0.3
   connectivity_plus: ^5.0.2
-  disk_space_plus: ^3.0.0
+  disk_space_plus: ^0.2.6
 
   # File operations
   file_picker: ^6.1.1
