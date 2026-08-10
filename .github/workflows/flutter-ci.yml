@@ -1,4 +1,4 @@
-name: Flutter CI
+name: Flutter Windows Build
 
 on:
   push:
@@ -7,16 +7,41 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build:
-    name: Launchdesk
-    runs-on: ubuntu-latest
+  build_windows:
+    name: Build LaunchDesk Windows App
+    runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
-      - run: flutter build apk --release
+
+      - name: Enable Windows desktop support
+        run: flutter config --enable-windows-desktop
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run static analysis
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build Windows executable
+        run: flutter build windows --release
+
+      - name: Package Release to Zip
+        shell: pwsh
+        run: |
+          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath launchdesk-windows.zip
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: launchdesk-windows-app
+          path: launchdesk-windows.zip
