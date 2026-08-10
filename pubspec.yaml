@@ -111,9 +111,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/config/
-    - assets/icons/
-    - assets/themes/
-    - assets/fonts/
 
   # OPTIONAL FONTS — uncomment and add font files to assets/fonts/ before building.
   # On Windows, Segoe UI is already a system font so this is not required.
