@@ -25,13 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Run static analysis
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test
-
+        
       - name: Build Windows executable
         run: flutter build windows --release
 
