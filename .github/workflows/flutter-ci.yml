@@ -30,10 +30,13 @@ jobs:
 
       - name: Regenerate Windows build files
         run: flutter create --platforms=windows .
+      
+      - name: Analyze Dart code
+        run: flutter analyze --no-fatal-infos
 
       - name: Build Windows executable
-        run: flutter build windows --release
-
+        run: flutter build windows --release --verbose
+        
       - name: Package Release to Zip
         shell: pwsh
         run: |
