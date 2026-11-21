@@ -12,6 +12,12 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - name: Set Up Devolopment Area
+        run: flutter clean
+        flutter pub get
+        flutter create --platforms=windows .
+        flutter build windows
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
