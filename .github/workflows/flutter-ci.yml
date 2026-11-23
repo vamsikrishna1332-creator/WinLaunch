@@ -31,6 +31,11 @@ jobs:
       - name: Regenerate Windows build files
         run: flutter create --platforms=windows .
       
+      - name: Remove generated template test
+        shell: pwsh
+        run: |
+          if (Test-Path test/widget_test.dart) { Remove-Item test/widget_test.dart -Force }
+
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
 
