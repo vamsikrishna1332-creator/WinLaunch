@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:system_info2/system_info2.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -40,6 +41,21 @@ class SystemInfoService {
     int batteryPercent = 100;
     bool isCharging = false;
     bool isOnline = false;
+
+    // Windows reports aggregate processor load via WMI. Keep the last valid
+    // reading if the query fails instead of showing a misleading 0%.
+    if (Platform.isWindows) {
+      try {
+        final result = await Process.run('powershell.exe', [
+          '-NoProfile', '-NonInteractive', '-Command',
+          '(Get-CimInstance Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average'
+        ]).timeout(const Duration(seconds: 5));
+        if (result.exitCode == 0) {
+          final value = double.tryParse(result.stdout.toString().trim());
+          if (value != null) cpuPercent = value.round().clamp(0, 100);
+        }
+      } catch (_) {}
+    }
 
     try {
       ramTotalMB = (SysInfo.getTotalPhysicalMemory() / 1024 / 1024).round();
