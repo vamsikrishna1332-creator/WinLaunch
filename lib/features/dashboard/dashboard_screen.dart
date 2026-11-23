@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
@@ -52,7 +53,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return settingsAsync.when(
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SizedBox.shrink(),
-      data: (settings) => Scaffold(
+      data: (settings) => material.Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
           children: [
@@ -349,7 +350,7 @@ class _CurrentTaskCard extends ConsumerWidget {
                   color: Colors.green.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text('RUNNING',
+                child: Text('RUNNING',
                     style: TextStyle(color: Colors.green, fontSize: 10, fontWeight: FontWeight.bold)),
               ),
             ],
@@ -377,7 +378,7 @@ class _CurrentTaskCard extends ConsumerWidget {
           // Progress bar
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
+            child: material.LinearProgressIndicator(
               value: progress,
               backgroundColor: Colors.white.withOpacity(0.1),
               valueColor: AlwaysStoppedAnimation<Color>(Color(current.color)),
