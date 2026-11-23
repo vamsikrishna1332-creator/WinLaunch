@@ -31,6 +31,19 @@ jobs:
       - name: Regenerate Windows build files
         run: flutter create --platforms=windows .
       
+      - name: Remove generated Flutter template test
+        shell: pwsh
+        run: |
+          # flutter create can generate a default test referencing MyApp, but this project uses LaunchDeskApp.
+          # Only remove the generated template; preserve any actual project tests.
+          $templateTest = 'test/widget_test.dart'
+          if (Test-Path $templateTest) {
+            $testContent = Get-Content $templateTest -Raw
+            if ($testContent -match 'MyApp\(' -and $testContent -match 'counter') {
+              Remove-Item $templateTest -Force
+            }
+          }
+
       - name: Apply custom WinLaunch Windows icon
         shell: pwsh
         run: |
