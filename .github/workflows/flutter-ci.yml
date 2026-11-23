@@ -41,7 +41,7 @@ jobs:
           Copy-Item $customIcon $runnerIcon -Force
           if (-not (Test-Path $runnerRc)) { throw "Missing Windows resource definition: $runnerRc" }
           $rc = Get-Content $runnerRc -Raw
-          if ($rc -notmatch 'app_icon\\.ico') { throw "Expected app_icon.ico reference not found in Runner.rc" }
+          if (-not $rc.Contains('app_icon.ico')) { throw 'Expected app_icon.ico reference not found in Runner.rc' }
 
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
