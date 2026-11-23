@@ -154,7 +154,7 @@ class _HomeTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
-    final schedules = ref.watch(scheduleProvider);
+    ref.watch(scheduleProvider);
     final current = ref.read(scheduleProvider.notifier).current;
     final next = ref.read(scheduleProvider.notifier).next;
 
