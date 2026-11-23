@@ -87,7 +87,7 @@ class _SystemWidgetState extends ConsumerState<SystemWidget> {
                   ),
                 ),
                 Text(
-                  widget.metric == SystemMetric.ram ? 'MB' : '%',
+                  '%',
                   style: TextStyle(
                     color: Color(theme.secondaryTextColor),
                     fontSize: 14,
