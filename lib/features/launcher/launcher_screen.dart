@@ -554,7 +554,7 @@ class _ShortcutListTile extends ConsumerWidget {
             ),
           ),
           if (s.isFavorite)
-            const Icon(FluentIcons.favorite_star_fill,
+            Icon(FluentIcons.favorite_star_fill,
                 size: 12, color: Colors.yellow),
           if (editMode) ...[
             const SizedBox(width: 8),
