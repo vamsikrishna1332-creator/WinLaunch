@@ -96,8 +96,8 @@ class _TodoWidgetState extends ConsumerState<TodoWidget> {
                     children: [
                       Icon(
                         t.isCompleted
-                            ? FluentIcons.checkbox_checked
-                            : FluentIcons.checkbox_unchecked,
+                            ? FluentIcons.checkbox_composite
+                            : FluentIcons.checkbox,
                         size: 16,
                         color: t.isCompleted
                             ? Color(theme.accentColor)
