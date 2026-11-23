@@ -1,11 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/models/app_shortcut_model.dart';
 import '../../core/providers/app_providers.dart';
 import '../../shared/components/glass_container.dart';
 import '../../shared/animations/animation_presets.dart';
-import 'package:uuid/uuid.dart';
 import 'add_shortcut_dialog.dart';
 
 class LauncherScreen extends ConsumerStatefulWidget {
