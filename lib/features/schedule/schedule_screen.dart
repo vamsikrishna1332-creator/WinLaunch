@@ -153,7 +153,7 @@ class _ScheduleCard extends ConsumerWidget {
                           color: Colors.green.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text('RUNNING',
+                        child: Text('RUNNING',
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 9,
