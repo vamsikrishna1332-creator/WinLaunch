@@ -52,7 +52,15 @@ jobs:
       - name: Package Release to Zip
         shell: pwsh
         run: |
-          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath launchdesk-windows.zip
+          $bundle = 'build/windows/x64/run'
+          if (-not (Test-Path "$bundle/launchdesk.exe")) { throw 'Missing bundled launchdesk.exe' }
+          if (-not (Test-Path "$bundle/flutter_windows.dll")) { throw 'Missing Flutter runtime DLL' }
+          if (-not (Test-Path "$bundle/data/flutter_assets")) { throw 'Missing Flutter assets' }
+          $plugins = @('battery_plus_plugin.dll', 'connectivity_plus_plugin.dll', 'file_selector_windows_plugin.dll', 'hotkey_manager_windows_plugin.dll')
+          foreach ($plugin in $plugins) {
+            if (-not (Test-Path (Join-Path $bundle $plugin))) { throw "Missing bundled plugin: $plugin" }
+          }
+          Compress-Archive -Path "$bundle/*" -DestinationPath launchdesk-windows.zip -Force
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
