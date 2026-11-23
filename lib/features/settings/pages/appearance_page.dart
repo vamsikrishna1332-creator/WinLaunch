@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart' hide ColorPicker;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import '../../../core/providers/app_providers.dart';
-import '../../../shared/components/glass_container.dart';
 import '../widgets/settings_section.dart';
 import '../widgets/settings_row.dart';
 
@@ -457,7 +456,6 @@ class _ColorRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
     return SettingsRow(
       label: label,
       child: GestureDetector(
