@@ -30,7 +30,7 @@ class StartupSplash extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Icon(
+                child: const material.Icon(
                   material.Icons.rocket_launch_rounded,
                   size: 44,
                   color: Colors.white,
