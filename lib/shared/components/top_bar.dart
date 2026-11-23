@@ -243,11 +243,11 @@ class _BatteryChip extends StatelessWidget {
   }
 
   IconData _batteryIcon(int percent) {
-    if (percent >= 80) return FluentIcons.battery_100;
+    if (percent >= 80) return FluentIcons.power_button;
     if (percent >= 60) return FluentIcons.battery_100;
-    if (percent >= 40) return FluentIcons.battery_50;
+    if (percent >= 40) return FluentIcons.power_button;
     if (percent >= 20) return FluentIcons.battery_50;
-    return FluentIcons.battery_0;
+    return FluentIcons.power_button;
   }
 }
 
