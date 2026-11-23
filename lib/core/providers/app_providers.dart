@@ -152,6 +152,7 @@ class LauncherNotifier extends StateNotifier<LauncherState> {
   Future<void> load() async {
     final shortcuts = await _svc.loadShortcuts();
     final groups = await _svc.loadGroups();
+    if (!mounted) return;
     state = state.copyWith(shortcuts: shortcuts, groups: groups);
   }
 
