@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/models/widget_config_model.dart';
@@ -27,7 +28,7 @@ class _WidgetBoardScreenState extends ConsumerState<WidgetBoardScreen> {
     final widgets = ref.watch(widgetBoardProvider);
     final theme = ref.watch(themeProvider);
 
-    return Scaffold(
+    return material.Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
         padding: EdgeInsets.all(theme.margin),
