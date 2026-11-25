@@ -4,6 +4,7 @@ import 'package:window_manager/window_manager.dart';
 import 'core/models/enums.dart';
 import 'core/providers/app_providers.dart';
 import 'features/dashboard/dashboard_screen.dart';
+import 'features/auth/local_login_gate.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/themes/theme_editor_screen.dart';
 import 'shared/components/startup_splash.dart';
@@ -68,7 +69,11 @@ class _LaunchDeskAppState extends ConsumerState<LaunchDeskApp>
             return _AppShell(child: child ?? const SizedBox());
           },
           routes: {
-            '/': (context) => const DashboardScreen(),
+            '/': (context) => LocalLoginGate(
+              builder: (userName, signOut) => DashboardScreen(
+                signedInName: userName, onSignOut: signOut,
+              ),
+            ),
             '/settings': (context) => const SettingsScreen(),
             '/theme-editor': (context) => const ThemeEditorScreen(),
           },
