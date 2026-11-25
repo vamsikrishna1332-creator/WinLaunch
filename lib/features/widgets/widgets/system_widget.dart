@@ -111,11 +111,10 @@ class _SystemWidgetState extends ConsumerState<SystemWidget> {
             // Progress bar
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: LinearProgressIndicator(
-                value: (value / 100).clamp(0.0, 1.0),
+              child: ProgressBar(
+                value: value.clamp(0, 100).toDouble(),
                 backgroundColor: Colors.white.withOpacity(0.1),
-                valueColor: AlwaysStoppedAnimation<Color>(color),
-                minHeight: 4,
+                activeColor: color,
               ),
             ),
             if (showGraph) ...[
