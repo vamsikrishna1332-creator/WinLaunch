@@ -543,7 +543,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           ]), padding: 13)),
         const SizedBox(width: 12),
         Expanded(flex: 2, child: _tile(Row(children: [
-          const Icon(FluentIcons.battery_3, color: _green, size: 20),
+          const Icon(FluentIcons.power_button, color: _green, size: 20),
           const SizedBox(width: 8),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Text('Battery', style: TextStyle(color: _muted, fontSize: 10)),
