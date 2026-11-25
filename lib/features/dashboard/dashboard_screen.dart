@@ -179,8 +179,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         s.isActive && s.startTime.isAfter(_now)).toList()
       ..sort((a, b) => a.startTime.compareTo(b.startTime));
     final next = upcoming.isEmpty ? null : upcoming.first;
-    final name = widget.signedInName ?? ref.watch(settingsProvider)
-        .maybeWhen(data: (v) => v.username, orElse: () => 'User');
+    final String name = widget.signedInName ??
+        ref.watch(settingsProvider).asData?.value.username ?? 'User';
 
     return Container(
       color: _background,
