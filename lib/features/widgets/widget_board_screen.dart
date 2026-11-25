@@ -27,9 +27,8 @@ class _WidgetBoardScreenState extends ConsumerState<WidgetBoardScreen> {
     final widgets = ref.watch(widgetBoardProvider);
     final theme = ref.watch(themeProvider);
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Padding(
+    return ScaffoldPage(
+      content: Padding(
         padding: EdgeInsets.all(theme.margin),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
