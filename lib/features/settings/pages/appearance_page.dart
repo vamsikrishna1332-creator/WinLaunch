@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart' hide ColorPicker;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import '../../../core/providers/app_providers.dart';
-import '../../../shared/components/glass_container.dart';
 import '../widgets/settings_section.dart';
 import '../widgets/settings_row.dart';
 
@@ -492,7 +491,6 @@ class _ColorRow extends ConsumerWidget {
           heading: Text(label,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
           subheading: const Text('Select shade'),
-          colorPickerType: ColorPickerType.both,
         ),
         actions: [
           Button(
