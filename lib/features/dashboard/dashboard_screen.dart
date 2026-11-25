@@ -135,7 +135,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       case 2:
         return const WidgetBoardScreen();
       case 3:
-        return const ScheduleScreen();
+        return ScheduleScreen(onBackToDashboard: () => setState(() => _selectedTab = 0));
       default:
         return const SizedBox.shrink();
     }
