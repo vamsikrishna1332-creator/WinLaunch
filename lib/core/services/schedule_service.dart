@@ -23,9 +23,9 @@ class ScheduleService {
           'repeatDays': jsonDecode(r['repeat_days'] as String? ?? '[]'),
           'startTime': r['start_time'],
           'endTime': r['end_time'],
-          'enableNotification': r['enable_notification'],
+          'enableNotification': r['enable_notification'] == 1,
           'notifyMinutesBefore': r['notify_minutes_before'],
-          'isActive': r['is_active'],
+          'isActive': r['is_active'] == 1,
           'createdAt': r['created_at'],
           'profileId': r['profile_id'],
         })).toList();
