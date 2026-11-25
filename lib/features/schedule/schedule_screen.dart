@@ -9,7 +9,9 @@ import '../../shared/components/glass_container.dart';
 import '../../shared/animations/animation_presets.dart';
 
 class ScheduleScreen extends ConsumerWidget {
-  const ScheduleScreen({super.key});
+  final VoidCallback? onBackToDashboard;
+
+  const ScheduleScreen({super.key, this.onBackToDashboard});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +26,20 @@ class ScheduleScreen extends ConsumerWidget {
           // Header
           Row(
             children: [
+              if (onBackToDashboard != null) ...[
+                Button(
+                  onPressed: onBackToDashboard,
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(FluentIcons.back, size: 12),
+                      SizedBox(width: 6),
+                      Text('Dashboard'),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+              ],
               Text('Schedule',
                   style: TextStyle(
                     color: Color(theme.textColor),
