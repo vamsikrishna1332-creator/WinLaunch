@@ -153,7 +153,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 13),
           decoration: BoxDecoration(
             color: selected ? const Color(0xFF272659)
-                : states.isHovered ? const Color(0xFF17243A) : null,
+                : const Color(0xFF0B1525),
             borderRadius: BorderRadius.circular(7),
           ),
           child: Row(children: [
@@ -218,8 +218,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 _sidebarItem(9),
               ],
             )),
-            const Divider(style: DividerThemeData(
-                thickness: 1, decoration: BoxDecoration(color: _border))),
+            Container(height: 1, color: _border),
             Container(
               padding: const EdgeInsets.all(13),
               child: Row(children: [
@@ -297,11 +296,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     if (_page == 9) return const ChatGptScreen();
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 790,
-              minHeight: constraints.maxHeight > 0
-                  ? constraints.maxHeight - 40 : 0),
+        scrollDirection: Axis.horizontal,
+        child: SizedBox(width: constraints.maxWidth < 980 ? 980 : constraints.maxWidth,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 790,
+                  minHeight: constraints.maxHeight > 0
+                      ? constraints.maxHeight - 40 : 0),
           child: switch (_page) {
             0 => _home(name, running, next),
             1 => _schedulePage(),
@@ -312,6 +314,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             7 => _notesPage(journal: true),
             _ => const SizedBox.shrink(),
           },
+            ),
+          ),
         ),
       );
     });
@@ -785,8 +789,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   Widget _link(String label, VoidCallback pressed) => HoverButton(
     onPressed: pressed,
     builder: (_, states) => Text(label, style: TextStyle(
-      fontSize: 10, color: states.isHovered
-          ? const Color(0xFFBDB5FF) : _purple)),
+      fontSize: 10, color: _purple)),
   );
 
   Widget _tile(Widget child, {double padding = 16}) => Container(
