@@ -28,7 +28,7 @@ class _CalendarWidgetState extends ConsumerState<CalendarWidget> {
     final schedules = ref.watch(scheduleProvider);
 
     final daysInMonth =
-        DateUtils.getDaysInMonth(_month.year, _month.month);
+        DateTime(_month.year, _month.month + 1, 0).day;
     final firstWeekday = DateTime(_month.year, _month.month, 1).weekday % 7;
 
     return Column(
@@ -87,12 +87,12 @@ class _CalendarWidgetState extends ConsumerState<CalendarWidget> {
               crossAxisCount: 7,
               childAspectRatio: 1,
             ),
-            itemCount: firstWeekday + daysInMonth,
+            itemCount: (firstWeekday + daysInMonth).toInt(),
             itemBuilder: (_, idx) {
               if (idx < firstWeekday) return const SizedBox.shrink();
               final day = idx - firstWeekday + 1;
               final date = DateTime(_month.year, _month.month, day);
-              final isToday = DateUtils.isSameDay(date, _today);
+              final isToday = (date.year == _today.year && date.month == _today.month && date.day == _today.day);
               final hasSchedule = schedules.any((s) => s.occursOn(date));
 
               return GestureDetector(
