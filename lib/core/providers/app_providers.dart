@@ -1,3 +1,4 @@
+export '../services/system_info_service.dart' show SystemSnapshot;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/settings_model.dart';
 import '../models/theme_model.dart';
@@ -5,7 +6,6 @@ import '../models/schedule_model.dart';
 import '../models/app_shortcut_model.dart';
 import '../models/widget_config_model.dart';
 import '../models/note_model.dart';
-import '../models/user_profile_model.dart';
 import '../services/settings_service.dart';
 import '../services/theme_service.dart';
 import '../services/schedule_service.dart';
@@ -370,4 +370,3 @@ final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoItem>>((ref) {
 });
 
 // Re-export SystemSnapshot
-export '../services/system_info_service.dart' show SystemSnapshot;
