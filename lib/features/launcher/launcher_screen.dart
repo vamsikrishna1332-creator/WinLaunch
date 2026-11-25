@@ -553,7 +553,7 @@ class _ShortcutListTile extends ConsumerWidget {
           ),
           if (s.isFavorite)
             const Icon(FluentIcons.favorite_star_fill,
-                size: 12, color: Colors.yellow),
+                size: 12, color: const Color(0xFFFFD166)),
           if (editMode) ...[
             const SizedBox(width: 8),
             IconButton(
