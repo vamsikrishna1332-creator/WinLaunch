@@ -179,7 +179,7 @@
   function btn(text,act,id='',variant='secondary'){return '<button class="btn '+variant+' small" data-action="'+esc(act)+'" data-id="'+esc(id)+'">'+esc(text)+'</button>';}
   function badge(text,cls=''){return '<span class="pill '+cls+'">'+esc(text)+'</span>';}
   function ring(pct,main,sub,color='var(--accent)'){
-    return '<div class="ring" style="--pct:'+Math.min(100,Math.max(0,pct))+';--ring-color:'+color+'"><div class="ring-inner"><strong>'+esc(main)+'</strong><small>'+esc(sub)+'</small></div></div>';
+    return '<div class="ring" style="--pct:'+Math.min(100,Math.max(0,pct))+'%;--ring-color:'+color+'"><div class="ring-inner"><strong>'+esc(main)+'</strong><small>'+esc(sub)+'</small></div></div>';
   }
   function miniSchedule(s){
     return '<div class="date-mini"><span class="date-dot" style="background:'+esc(validColor(s.color)?s.color:data.settings.accent)+'"></span><div class="line-main"><div class="line-title">'+esc(s.title)+'</div><div class="time">'+esc(s.start)+' – '+esc(s.end)+'</div></div>'+ (s===runningSchedule()?badge('RUNNING','ok'):'')+'</div>';
