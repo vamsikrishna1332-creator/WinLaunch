@@ -54,7 +54,8 @@ jobs:
           $required = @(
             'launchdesk.exe',
             'flutter_windows.dll',
-            'data/flutter_assets/kernel_blob.bin',
+            'data/app.so',
+            'data/flutter_assets/AssetManifest.bin',
             'data/icudtl.dat'
           )
           foreach ($item in $required) {
