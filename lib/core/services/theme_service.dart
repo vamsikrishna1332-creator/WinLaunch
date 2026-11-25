@@ -1,7 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart';
 import '../models/theme_model.dart';
 import '../database/database_helper.dart';
 

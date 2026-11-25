@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' as material;
 import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,8 +113,8 @@ class _TopBarState extends ConsumerState<TopBar> {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Icon(
                             sys.isOnline
-                                ? FluentIcons.wifi1
-                                : FluentIcons.wifi_warning4,
+                                ? FluentIcons.wifi
+                                : FluentIcons.wifi,
                             size: 14,
                             color: sys.isOnline
                                 ? Color(theme.successColor)
@@ -230,7 +231,7 @@ class _BatteryChip extends StatelessWidget {
         children: [
           Icon(
             isCharging
-                ? FluentIcons.battery_charging0
+                ? material.Icons.battery_charging_full
                 : _batteryIcon(percent),
             size: 14,
             color: color,
@@ -243,11 +244,11 @@ class _BatteryChip extends StatelessWidget {
   }
 
   IconData _batteryIcon(int percent) {
-    if (percent >= 80) return FluentIcons.battery10;
-    if (percent >= 60) return FluentIcons.battery7;
-    if (percent >= 40) return FluentIcons.battery6;
-    if (percent >= 20) return FluentIcons.battery4;
-    return FluentIcons.battery1;
+    if (percent >= 80) return material.Icons.battery_full;
+    if (percent >= 60) return material.Icons.battery_full;
+    if (percent >= 40) return material.Icons.battery_full;
+    if (percent >= 20) return material.Icons.battery_full;
+    return material.Icons.battery_full;
   }
 }
 

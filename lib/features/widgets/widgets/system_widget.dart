@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' as material;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -111,7 +112,7 @@ class _SystemWidgetState extends ConsumerState<SystemWidget> {
             // Progress bar
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: LinearProgressIndicator(
+              child: material.LinearProgressIndicator(
                 value: (value / 100).clamp(0.0, 1.0),
                 backgroundColor: Colors.white.withOpacity(0.1),
                 valueColor: AlwaysStoppedAnimation<Color>(color),

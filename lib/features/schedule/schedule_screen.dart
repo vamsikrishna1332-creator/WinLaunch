@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart' as material;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import '../../core/models/schedule_model.dart';
@@ -9,7 +9,9 @@ import '../../shared/components/glass_container.dart';
 import '../../shared/animations/animation_presets.dart';
 
 class ScheduleScreen extends ConsumerWidget {
-  const ScheduleScreen({super.key});
+  final VoidCallback? onBackToDashboard;
+
+  const ScheduleScreen({super.key, this.onBackToDashboard});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,6 +26,20 @@ class ScheduleScreen extends ConsumerWidget {
           // Header
           Row(
             children: [
+              if (onBackToDashboard != null) ...[
+                Button(
+                  onPressed: onBackToDashboard,
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(FluentIcons.back, size: 12),
+                      SizedBox(width: 6),
+                      Text('Dashboard'),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+              ],
               Text('Schedule',
                   style: TextStyle(
                     color: Color(theme.textColor),
@@ -152,7 +168,7 @@ class _ScheduleCard extends ConsumerWidget {
                           color: Colors.green.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text('RUNNING',
+                        child: Text('RUNNING',
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 9,
@@ -196,7 +212,7 @@ class _ScheduleCard extends ConsumerWidget {
                   const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
+                    child: material.LinearProgressIndicator(
                       value: s.progress,
                       backgroundColor: Colors.white.withOpacity(0.1),
                       valueColor: AlwaysStoppedAnimation<Color>(Color(s.color)),

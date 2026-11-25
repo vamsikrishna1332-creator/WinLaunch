@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' as material;
 import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,9 +53,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return settingsAsync.when(
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SizedBox.shrink(),
-      data: (settings) => Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
+      data: (settings) => ScaffoldPage(
+        content: Column(
           children: [
             // Top bar
             const TopBar(),
@@ -135,7 +135,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       case 2:
         return const WidgetBoardScreen();
       case 3:
-        return const ScheduleScreen();
+        return ScheduleScreen(onBackToDashboard: () => setState(() => _selectedTab = 0));
       default:
         return const SizedBox.shrink();
     }
@@ -153,7 +153,6 @@ class _HomeTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
-    final schedules = ref.watch(scheduleProvider);
     final current = ref.read(scheduleProvider.notifier).current;
     final next = ref.read(scheduleProvider.notifier).next;
 
@@ -349,7 +348,7 @@ class _CurrentTaskCard extends ConsumerWidget {
                   color: Colors.green.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: const Text('RUNNING',
+                child: Text('RUNNING',
                     style: TextStyle(color: Colors.green, fontSize: 10, fontWeight: FontWeight.bold)),
               ),
             ],
@@ -377,7 +376,7 @@ class _CurrentTaskCard extends ConsumerWidget {
           // Progress bar
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
+            child: material.LinearProgressIndicator(
               value: progress,
               backgroundColor: Colors.white.withOpacity(0.1),
               valueColor: AlwaysStoppedAnimation<Color>(Color(current.color)),
