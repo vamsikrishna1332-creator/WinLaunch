@@ -87,3 +87,37 @@ jobs:
           name: launchdesk-windows-app
           path: launchdesk-windows.zip
           if-no-files-found: error
+
+      - name: Install Inno Setup compiler
+        shell: pwsh
+        run: |
+          choco install innosetup --yes --no-progress
+
+      - name: Build LaunchDesk Windows installer
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $compiler = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6/ISCC.exe'
+          if (-not (Test-Path -LiteralPath $compiler)) {
+            throw "Inno Setup compiler was not installed: $compiler"
+          }
+          $source = Join-Path $PWD 'build/windows/x64/run'
+          $output = Join-Path $PWD 'installer-output'
+          New-Item -ItemType Directory -Force -Path $output | Out-Null
+          & $compiler "/DAppSource=$source" "/O$output" 'installer/LaunchDesk.iss'
+          if ($LASTEXITCODE -ne 0) { throw "Inno Setup compiler failed: $LASTEXITCODE" }
+          $setup = Join-Path $output 'LaunchDesk-Setup.exe'
+          if (-not (Test-Path -LiteralPath $setup -PathType Leaf)) {
+            throw "Expected LaunchDesk-Setup.exe was not generated."
+          }
+          if ((Get-Item $setup).Length -lt 1000000) {
+            throw "Installer is unexpectedly small."
+          }
+          Write-Host "Installer created: $setup"
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LaunchDesk-Windows-Installer
+          path: installer-output/LaunchDesk-Setup.exe
+          if-no-files-found: error
