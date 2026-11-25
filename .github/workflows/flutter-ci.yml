@@ -34,6 +34,9 @@ jobs:
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
 
+      - name: Run Flutter tests
+        run: flutter test
+
       - name: Build Windows executable
         run: flutter build windows --release --verbose
         
