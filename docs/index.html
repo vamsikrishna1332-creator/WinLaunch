@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#091423">
+  <meta name="description" content="Try LaunchDesk in your browser. Demo User workspace with local-only settings, shortcuts, schedules, tasks and productivity tools.">
+  <title>LaunchDesk — Interactive Demo</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+<div id="app" class="app-shell">
+  <aside class="sidebar" aria-label="Main navigation">
+    <div class="brand"><span class="brand-name">LaunchDesk</span><span class="brand-sub">Interactive browser demo</span></div>
+    <nav id="nav" class="nav-list" aria-label="LaunchDesk features"></nav>
+    <div class="profile"><div class="avatar">D</div><div class="profile-text"><b>Demo User</b><small>Your private demo workspace</small></div><button class="icon-button" id="reset-workspace" title="Reset demo workspace" aria-label="Reset demo workspace">↺</button></div>
+  </aside>
+  <div class="main">
+    <header class="notice"><span class="notice-tag">📢 NOTICE</span><span class="notice-dot"></span><span id="notice-text">Browser demo · Data stays on this device</span><span class="notice-separator">◆</span><span class="notice-extra">Stay focused. Great things take time.</span></header>
+    <div id="content" class="content" role="main" tabindex="-1"></div>
+  </div>
+</div>
+<div class="toast-area" id="toasts" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modal" hidden></div>
+<noscript><div class="noscript">Enable JavaScript to try the interactive LaunchDesk demo.</div></noscript>
+</body>
+</html>
