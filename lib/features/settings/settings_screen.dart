@@ -16,7 +16,8 @@ import 'pages/advanced_page.dart';
 import 'pages/about_page.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({super.key});
+  final VoidCallback? onBack;
+  const SettingsScreen({super.key, this.onBack});
 
   @override
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
@@ -60,7 +61,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       Text('Back'),
                     ],
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: widget.onBack ?? () => Navigator.pop(context),
                 ),
                 const SizedBox(width: 16),
                 Text(
