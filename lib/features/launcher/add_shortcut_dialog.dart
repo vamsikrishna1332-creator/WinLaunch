@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:uuid/uuid.dart';
 import '../../core/models/app_shortcut_model.dart';
-import '../../core/providers/app_providers.dart';
 
 class AddShortcutDialog extends ConsumerStatefulWidget {
   const AddShortcutDialog({super.key});
