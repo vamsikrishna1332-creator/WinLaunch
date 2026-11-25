@@ -13,6 +13,7 @@ import '../services/launcher_service.dart';
 import '../services/widget_service.dart';
 import '../services/system_info_service.dart';
 import '../services/note_service.dart';
+export '../services/system_info_service.dart' show SystemSnapshot;
 
 // ─── Services (singletons) ────────────────────────────────────────────────────
 
@@ -369,5 +370,3 @@ final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoItem>>((ref) {
   return TodoNotifier(ref.read(noteServiceProvider));
 });
 
-// Re-export SystemSnapshot
-export '../services/system_info_service.dart' show SystemSnapshot;
