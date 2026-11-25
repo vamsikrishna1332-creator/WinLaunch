@@ -524,8 +524,9 @@
       if(!app)return;
       const url=safeUrl(app.url);
       if(!url)return toast('Invalid website link',true);
-      const tab=window.open(url,'_blank','noopener,noreferrer');
-      if(!tab)toast('Allow pop-ups to open this website.',true);
+      const link=document.createElement('a');
+      link.href=url;link.target='_blank';link.rel='noopener noreferrer';
+      document.body.appendChild(link);link.click();link.remove();
       logEvent('Opened link: '+app.name,'app');store();
       return;
     }
