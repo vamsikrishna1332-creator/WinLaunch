@@ -33,7 +33,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _SettingItem(FluentIcons.color, 'Themes', 'Theme engine & editor'),
     _SettingItem(FluentIcons.ringer, 'Notifications', 'Alerts & sounds'),
     _SettingItem(FluentIcons.save, 'Backup', 'Import & export data'),
-    _SettingItem(FluentIcons.accessibility, 'Accessibility', 'Visual & input aids'),
+    _SettingItem(FluentIcons.settings, 'Accessibility', 'Visual & input aids'),
     _SettingItem(FluentIcons.speed_high, 'Performance', 'Startup & memory'),
     _SettingItem(FluentIcons.settings, 'Advanced', 'Developer & power user'),
     _SettingItem(FluentIcons.info, 'About', 'Version & licenses'),
