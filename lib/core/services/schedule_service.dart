@@ -33,7 +33,6 @@ class ScheduleService {
 
   Future<Schedule?> getCurrentSchedule({String profileId = 'default'}) async {
     final schedules = await loadSchedules(profileId: profileId);
-    final now = DateTime.now();
     for (final s in schedules) {
       if (!s.isActive) continue;
       if (s.isRunning) return s;
