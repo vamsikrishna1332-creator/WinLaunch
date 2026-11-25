@@ -65,7 +65,7 @@ class _ChatGptScreenState extends State<ChatGptScreen> {
               ),
               if (_error != null) ...[
                 const SizedBox(height: 12),
-                Text(_error!, style: const TextStyle(color: Colors.red)),
+                Text(_error!, style: const TextStyle(color: Color(0xFFFF7474))),
               ],
               const SizedBox(height: 16),
               const Text(
