@@ -492,7 +492,6 @@ class _ColorRow extends ConsumerWidget {
           heading: Text(label,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
           subheading: const Text('Select shade'),
-          colorPickerType: ColorPickerType.both,
         ),
         actions: [
           Button(
