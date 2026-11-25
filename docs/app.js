@@ -380,7 +380,7 @@
     if(page==='dashboard'||page==='schedule')refreshNotice();
     if(page==='focus'){
       const r=$('#big-ring .ring');if(r){
-        r.style.setProperty('--pct',focusPercent());
+        r.style.setProperty('--pct',focusPercent()+'%');
         const txt=r.querySelector('.ring-inner strong');if(txt)txt.textContent=duration(data.focus.remaining);
       }
     }
@@ -416,7 +416,7 @@
     if(type==='textarea')input='<textarea name="'+name+'" rows="5">'+esc(value)+'</textarea>';
     else if(type==='select')input='<select name="'+name+'">'+opts.map(o=>'<option value="'+esc(o[0])+'" '+(String(value)===String(o[0])?'selected':'')+'>'+esc(o[1])+'</option>').join('')+'</select>';
     else input='<input name="'+name+'" type="'+type+'" value="'+esc(value)+'" '+(type==='color'?'':'')+' '+(name==='title'||name==='url'||name==='start'||name==='end'?'required':'')+'>';
-    return '<div class="field"><label for="dialog-'+name+'">'+esc(label)+'</label>'+input.replace('name="'+name+'"','name="'+name+'" id="dialog-'+name+'"')+'</div>';
+    return '<div class="field"><label for="dialog-field-'+name+'">'+esc(label)+'</label>'+input.replace('name="'+name+'"','name="'+name+'" id="dialog-field-'+name+'"')+'</div>';
   }
   function openEditor(type,id=''){
     const map={task:'tasks',schedule:'schedules',note:'notes',journal:'journal',app:'apps',habit:'habits'};
