@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' as material;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -6,9 +7,9 @@ class StartupSplash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return material.MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      home: material.Scaffold(
         backgroundColor: const Color(0xFF0D1117),
         body: Center(
           child: Column(
@@ -30,7 +31,7 @@ class StartupSplash extends StatelessWidget {
                   ],
                 ),
                 child: const Icon(
-                  Icons.rocket_launch_rounded,
+                  material.Icons.rocket_launch_rounded,
                   size: 44,
                   color: Colors.white,
                 ),
@@ -63,7 +64,7 @@ class StartupSplash extends StatelessWidget {
               const SizedBox(height: 40),
               const SizedBox(
                 width: 200,
-                child: LinearProgressIndicator(
+                child: material.LinearProgressIndicator(
                   backgroundColor: Color(0xFF21262D),
                   valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF0078D4)),
                 ),
