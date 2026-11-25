@@ -196,11 +196,10 @@ class _ScheduleCard extends ConsumerWidget {
                   const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
-                      value: s.progress,
+                    child: ProgressBar(
+                      value: (s.progress * 100).clamp(0, 100).toDouble(),
                       backgroundColor: Colors.white.withOpacity(0.1),
-                      valueColor: AlwaysStoppedAnimation<Color>(Color(s.color)),
-                      minHeight: 4,
+                      activeColor: Color(s.color),
                     ),
                   ),
                 ],
