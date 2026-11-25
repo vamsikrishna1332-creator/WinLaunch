@@ -1,0 +1,75 @@
+name: LaunchDesk Web Demo
+
+on:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'web-demo-tests/**'
+      - '.github/workflows/web-demo.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'web-demo-tests/**'
+      - '.github/workflows/web-demo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: launchdesk-web-demo-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check browser JavaScript syntax
+        run: node --check docs/app.js
+      - name: Install Playwright test dependencies
+        run: npm install --no-save @playwright/test
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser smoke tests
+        run: npx playwright test --config web-demo-tests/playwright.config.cjs
+      - name: Upload browser test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: launchdesk-web-demo-tests
+          path: |
+            launchdesk-demo-preview.png
+            web-demo-test-report/
+            test-results/
+          if-no-files-found: ignore
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - name: Deploy website
+        id: deployment
+        uses: actions/deploy-pages@v4
