@@ -1,4 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide ColorPicker;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -40,9 +40,8 @@ class _ThemeEditorScreenState extends ConsumerState<ThemeEditorScreen> {
   Widget build(BuildContext context) {
     final theme = ref.watch(themeProvider);
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
+    return ScaffoldPage(
+      content: Column(
         children: [
           // Header
           GlassContainer(
