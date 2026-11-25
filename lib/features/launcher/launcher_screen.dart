@@ -431,7 +431,7 @@ class _ShortcutCardState extends ConsumerState<_ShortcutCard> {
 
               // Favorite star
               if (s.isFavorite)
-                const Positioned(
+                Positioned(
                   top: 4,
                   left: 4,
                   child: Icon(FluentIcons.favorite_star_fill,
