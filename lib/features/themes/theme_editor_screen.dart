@@ -270,7 +270,6 @@ class _ColorProp extends StatelessWidget {
           color: color,
           onColorChanged: (c) => picked = c,
           width: 36, height: 36, borderRadius: 4,
-          colorPickerType: ColorPickerType.both,
         ),
         actions: [
           Button(child: const Text('Cancel'), onPressed: () => Navigator.pop(context)),
