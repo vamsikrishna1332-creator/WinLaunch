@@ -10,6 +10,7 @@ import '../../core/providers/app_providers.dart';
 import '../launcher/launcher_screen.dart';
 import '../schedule/schedule_screen.dart';
 import '../settings/settings_screen.dart';
+import '../widgets/widget_board_screen.dart';
 import '../chatgpt/chatgpt_screen.dart';
 
 const _background = Color(0xFF081423);
@@ -35,13 +36,13 @@ class DashboardScreen extends ConsumerStatefulWidget {
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   static const _labels = <String>[
     'Dashboard', 'Schedule', 'Tasks', 'Notes', 'Apps',
-    'Focus Timer', 'Habits', 'Journal', 'Settings', 'ChatGPT'
+    'Focus Timer', 'Habits', 'Journal', 'Settings', 'ChatGPT', 'Widgets'
   ];
   static const _icons = <IconData>[
     FluentIcons.home, FluentIcons.calendar, FluentIcons.check_mark,
     FluentIcons.edit, FluentIcons.app_icon_default, FluentIcons.timer,
     FluentIcons.favorite_star, FluentIcons.page, FluentIcons.settings,
-    FluentIcons.chat
+    FluentIcons.chat, FluentIcons.app_icon_default
   ];
   int _page = 0;
   DateTime _now = DateTime.now();
@@ -216,6 +217,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                       fontSize: 9, letterSpacing: 1, color: _muted)),
                 ),
                 _sidebarItem(9),
+                _sidebarItem(10),
               ],
             )),
             Container(height: 1, color: _border),
@@ -292,8 +294,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   Widget _body(String name, Schedule? running, Schedule? next) {
     if (_page == 4) return const LauncherScreen();
-    if (_page == 8) return const SettingsScreen();
+    if (_page == 8) return SettingsScreen(
+      onBack: () => setState(() => _page = 0));
     if (_page == 9) return const ChatGptScreen();
+    if (_page == 10) return const WidgetBoardScreen();
     return LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
