@@ -437,7 +437,7 @@ class _ShortcutCardState extends ConsumerState<_ShortcutCard> {
                   top: 4,
                   left: 4,
                   child: Icon(FluentIcons.favorite_star_fill,
-                      size: 10, color: Colors.yellow),
+                      size: 10, color: const Color(0xFFFFD166)),
                 ),
             ],
           ),
