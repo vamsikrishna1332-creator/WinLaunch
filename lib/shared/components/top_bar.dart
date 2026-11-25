@@ -112,8 +112,8 @@ class _TopBarState extends ConsumerState<TopBar> {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Icon(
                             sys.isOnline
-                                ? FluentIcons.wifi1
-                                : FluentIcons.wifi_warning4,
+                                ? FluentIcons.globe
+                                : FluentIcons.warning,
                             size: 14,
                             color: sys.isOnline
                                 ? Color(theme.successColor)
@@ -230,7 +230,7 @@ class _BatteryChip extends StatelessWidget {
         children: [
           Icon(
             isCharging
-                ? FluentIcons.battery_charging0
+                ? FluentIcons.power_button
                 : _batteryIcon(percent),
             size: 14,
             color: color,
@@ -243,11 +243,11 @@ class _BatteryChip extends StatelessWidget {
   }
 
   IconData _batteryIcon(int percent) {
-    if (percent >= 80) return FluentIcons.battery10;
-    if (percent >= 60) return FluentIcons.battery7;
-    if (percent >= 40) return FluentIcons.battery6;
-    if (percent >= 20) return FluentIcons.battery4;
-    return FluentIcons.battery1;
+    if (percent >= 80) return FluentIcons.power_button;
+    if (percent >= 60) return FluentIcons.power_button;
+    if (percent >= 40) return FluentIcons.power_button;
+    if (percent >= 20) return FluentIcons.power_button;
+    return FluentIcons.power_button;
   }
 }
 
