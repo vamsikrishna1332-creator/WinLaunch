@@ -20,11 +20,12 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
+      - name: Verify Android SDK
+        run: flutter doctor -v
       - name: Dependencies
         run: flutter pub get
       - name: Generate missing Android Flutter scaffolding
