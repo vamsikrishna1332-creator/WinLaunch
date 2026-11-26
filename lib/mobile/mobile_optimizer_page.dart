@@ -183,7 +183,7 @@ class _MobileOptimizerPageState extends State<MobileOptimizerPage> {
                       : data!.memoryPercent!.toStringAsFixed(1) + '%',
                   Icons.data_usage,
                   detail: data?.totalMemoryMB == null ? null
-                      : data!.usedMemoryMB.toString() + ' MB of ' +
+                      : (data!.usedMemoryMB?.toString() ?? '—') + ' MB of ' +
                         data.totalMemoryMB.toString() + ' MB'),
                 const Divider(color: _border),
                 _metric('Network connection',
