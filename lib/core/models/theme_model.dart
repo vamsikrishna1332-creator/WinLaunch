@@ -186,13 +186,6 @@ class LaunchDeskTheme {
       scaffoldBackgroundColor: Colors.transparent,
       cardColor: Color(cardColor).withOpacity(glassOpacity + 0.05),
       fontFamily: fontFamily,
-      typography: Typography.fromTextStyle(
-        TextStyle(
-          color: Color(textColor),
-          fontSize: baseFontSize,
-          fontFamily: fontFamily,
-        ),
-      ),
       micaBackgroundColor: Color(backgroundColor),
     );
   }

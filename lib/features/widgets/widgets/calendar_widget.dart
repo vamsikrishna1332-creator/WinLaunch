@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/widget_config_model.dart';
@@ -28,7 +29,7 @@ class _CalendarWidgetState extends ConsumerState<CalendarWidget> {
     final schedules = ref.watch(scheduleProvider);
 
     final daysInMonth =
-        DateUtils.getDaysInMonth(_month.year, _month.month);
+        material.DateUtils.getDaysInMonth(_month.year, _month.month);
     final firstWeekday = DateTime(_month.year, _month.month, 1).weekday % 7;
 
     return Column(
@@ -92,7 +93,7 @@ class _CalendarWidgetState extends ConsumerState<CalendarWidget> {
               if (idx < firstWeekday) return const SizedBox.shrink();
               final day = idx - firstWeekday + 1;
               final date = DateTime(_month.year, _month.month, day);
-              final isToday = DateUtils.isSameDay(date, _today);
+              final isToday = material.DateUtils.isSameDay(date, _today);
               final hasSchedule = schedules.any((s) => s.occursOn(date));
 
               return GestureDetector(

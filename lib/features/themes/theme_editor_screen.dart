@@ -1,4 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide ColorPicker;
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:uuid/uuid.dart';
@@ -40,7 +41,7 @@ class _ThemeEditorScreenState extends ConsumerState<ThemeEditorScreen> {
   Widget build(BuildContext context) {
     final theme = ref.watch(themeProvider);
 
-    return Scaffold(
+    return material.Scaffold(
       backgroundColor: Colors.transparent,
       body: Column(
         children: [
@@ -271,7 +272,6 @@ class _ColorProp extends StatelessWidget {
           color: color,
           onColorChanged: (c) => picked = c,
           width: 36, height: 36, borderRadius: 4,
-          colorPickerType: ColorPickerType.both,
         ),
         actions: [
           Button(child: const Text('Cancel'), onPressed: () => Navigator.pop(context)),
