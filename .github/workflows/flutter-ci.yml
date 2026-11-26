@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, master ]
 
+concurrency:
+  group: launchdesk-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build_windows:
     name: Build LaunchDesk Windows App
@@ -34,16 +38,86 @@ jobs:
       - name: Analyze Dart code
         run: flutter analyze --no-fatal-infos
 
+      - name: Run Flutter tests
+        run: flutter test
+
       - name: Build Windows executable
         run: flutter build windows --release --verbose
         
-      - name: Package Release to Zip
+      - name: Verify and package complete Windows application
         shell: pwsh
         run: |
-          Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath launchdesk-windows.zip
+          $ErrorActionPreference = 'Stop'
+          # Flutter's CMake INSTALL target places the complete deployable app
+          # in build/windows/x64/run, NOT runner/Release.
+          $release = Join-Path $PWD 'build/windows/x64/run'
+          $required = @(
+            'launchdesk.exe',
+            'flutter_windows.dll',
+            'data/app.so',
+            'data/flutter_assets/AssetManifest.bin',
+            'data/icudtl.dat'
+          )
+          foreach ($item in $required) {
+            $target = Join-Path $release $item
+            if (-not (Test-Path -LiteralPath $target -PathType Leaf)) {
+              throw "Missing required Windows release file: $target"
+            }
+          }
+          $dlls = @(Get-ChildItem -LiteralPath $release -Filter '*.dll' -File)
+          if ($dlls.Count -lt 2) {
+            throw "Incomplete Windows release: expected Flutter and plugin DLLs."
+          }
+          $size = (Get-ChildItem -LiteralPath $release -Recurse -File |
+            Measure-Object -Property Length -Sum).Sum
+          if ($size -lt 10000000) {
+            throw "Release is unexpectedly small ($size bytes); refusing to upload."
+          }
+          Write-Host "Packaging complete Windows deployment: $release"
+          Get-ChildItem -LiteralPath $release | Select-Object Name, Length
+          Compress-Archive -Path (Join-Path $release '*') -DestinationPath launchdesk-windows.zip -Force
+          $zip = Get-Item -LiteralPath launchdesk-windows.zip
+          if ($zip.Length -lt 1000000) {
+            throw "Windows ZIP is unexpectedly small ($($zip.Length) bytes)."
+          }
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: launchdesk-windows-app
           path: launchdesk-windows.zip
+          if-no-files-found: error
+
+      - name: Install Inno Setup compiler
+        shell: pwsh
+        run: |
+          choco install innosetup --yes --no-progress
+
+      - name: Build LaunchDesk Windows installer
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $compiler = Join-Path ${env:ProgramFiles(x86)} 'Inno Setup 6/ISCC.exe'
+          if (-not (Test-Path -LiteralPath $compiler)) {
+            throw "Inno Setup compiler was not installed: $compiler"
+          }
+          $source = Join-Path $PWD 'build/windows/x64/run'
+          $output = Join-Path $PWD 'installer-output'
+          New-Item -ItemType Directory -Force -Path $output | Out-Null
+          & $compiler "/DAppSource=$source" "/O$output" 'installer/LaunchDesk.iss'
+          if ($LASTEXITCODE -ne 0) { throw "Inno Setup compiler failed: $LASTEXITCODE" }
+          $setup = Join-Path $output 'LaunchDesk-Setup.exe'
+          if (-not (Test-Path -LiteralPath $setup -PathType Leaf)) {
+            throw "Expected LaunchDesk-Setup.exe was not generated."
+          }
+          if ((Get-Item $setup).Length -lt 1000000) {
+            throw "Installer is unexpectedly small."
+          }
+          Write-Host "Installer created: $setup"
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: LaunchDesk-Windows-Installer
+          path: installer-output/LaunchDesk-Setup.exe
+          if-no-files-found: error

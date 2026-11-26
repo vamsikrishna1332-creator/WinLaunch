@@ -1,11 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/models/app_shortcut_model.dart';
 import '../../core/providers/app_providers.dart';
 import '../../shared/components/glass_container.dart';
 import '../../shared/animations/animation_presets.dart';
-import 'package:uuid/uuid.dart';
 import 'add_shortcut_dialog.dart';
 
 class LauncherScreen extends ConsumerStatefulWidget {
@@ -437,7 +435,7 @@ class _ShortcutCardState extends ConsumerState<_ShortcutCard> {
                   top: 4,
                   left: 4,
                   child: Icon(FluentIcons.favorite_star_fill,
-                      size: 10, color: Colors.yellow),
+                      size: 10, color: const Color(0xFFFFD166)),
                 ),
             ],
           ),
@@ -555,7 +553,7 @@ class _ShortcutListTile extends ConsumerWidget {
           ),
           if (s.isFavorite)
             const Icon(FluentIcons.favorite_star_fill,
-                size: 12, color: Colors.yellow),
+                size: 12, color: const Color(0xFFFFD166)),
           if (editMode) ...[
             const SizedBox(width: 8),
             IconButton(

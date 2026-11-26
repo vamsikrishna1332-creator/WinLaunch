@@ -4,6 +4,7 @@ import 'package:window_manager/window_manager.dart';
 import 'core/models/enums.dart';
 import 'core/providers/app_providers.dart';
 import 'features/dashboard/dashboard_screen.dart';
+import 'features/auth/local_login_gate.dart';
 import 'features/settings/settings_screen.dart';
 import 'features/themes/theme_editor_screen.dart';
 import 'shared/components/startup_splash.dart';
@@ -68,7 +69,11 @@ class _LaunchDeskAppState extends ConsumerState<LaunchDeskApp>
             return _AppShell(child: child ?? const SizedBox());
           },
           routes: {
-            '/': (context) => const DashboardScreen(),
+            '/': (context) => LocalLoginGate(
+              builder: (userName, signOut) => DashboardScreen(
+                signedInName: userName, onSignOut: signOut,
+              ),
+            ),
             '/settings': (context) => const SettingsScreen(),
             '/theme-editor': (context) => const ThemeEditorScreen(),
           },
@@ -91,7 +96,7 @@ class _AppShell extends ConsumerWidget {
       children: [
         // Animated background
         if (themeState.backgroundType == BackgroundType.color)
-          Container(color: themeState.backgroundColor),
+          Container(color: Color(themeState.backgroundColor)),
 
         if (themeState.backgroundType == BackgroundType.gradient)
           Container(
@@ -99,7 +104,7 @@ class _AppShell extends ConsumerWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: themeState.gradientColors,
+                colors: themeState.gradientColors.map((value) => Color(value)).toList(),
               ),
             ),
           ),
@@ -111,7 +116,7 @@ class _AppShell extends ConsumerWidget {
               themeState.backgroundImagePath!,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
-                color: themeState.backgroundColor,
+                color: Color(themeState.backgroundColor),
               ),
             ),
           ),
@@ -119,7 +124,7 @@ class _AppShell extends ConsumerWidget {
         // Particle effect overlay
         if (themeState.enableParticles)
           Positioned.fill(
-            child: ParticleOverlay(config: themeState.particleConfig),
+            child: ParticleOverlay(config: ParticleConfig.fromJson(themeState.particleConfig)),
           ),
 
         // Main content
@@ -139,7 +144,7 @@ class ErrorScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(FluentIcons.error, size: 64, color: Colors.red),
+            const Icon(FluentIcons.error, size: 64, color: Color(0xFFFF7373)),
             const SizedBox(height: 16),
             const Text('Failed to load LaunchDesk settings.',
                 style: TextStyle(fontSize: 18)),

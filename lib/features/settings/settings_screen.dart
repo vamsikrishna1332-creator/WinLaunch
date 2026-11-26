@@ -16,7 +16,8 @@ import 'pages/advanced_page.dart';
 import 'pages/about_page.dart';
 
 class SettingsScreen extends ConsumerStatefulWidget {
-  const SettingsScreen({super.key});
+  final VoidCallback? onBack;
+  const SettingsScreen({super.key, this.onBack});
 
   @override
   ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
@@ -29,11 +30,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     _SettingItem(FluentIcons.color, 'Appearance', 'Colors, fonts, effects'),
     _SettingItem(FluentIcons.app_icon_default, 'Launcher', 'App grid & shortcuts'),
     _SettingItem(FluentIcons.calendar, 'Schedule', 'Time & task settings'),
-    _SettingItem(FluentIcons.web_components, 'Widgets', 'Widget board settings'),
-    _SettingItem(FluentIcons.paint_bucket, 'Themes', 'Theme engine & editor'),
+    _SettingItem(FluentIcons.app_icon_default, 'Widgets', 'Widget board settings'),
+    _SettingItem(FluentIcons.color, 'Themes', 'Theme engine & editor'),
     _SettingItem(FluentIcons.ringer, 'Notifications', 'Alerts & sounds'),
     _SettingItem(FluentIcons.save, 'Backup', 'Import & export data'),
-    _SettingItem(FluentIcons.accessibility_checker, 'Accessibility', 'Visual & input aids'),
+    _SettingItem(FluentIcons.settings, 'Accessibility', 'Visual & input aids'),
     _SettingItem(FluentIcons.speed_high, 'Performance', 'Startup & memory'),
     _SettingItem(FluentIcons.settings, 'Advanced', 'Developer & power user'),
     _SettingItem(FluentIcons.info, 'About', 'Version & licenses'),
@@ -43,9 +44,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final theme = ref.watch(themeProvider);
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Column(
+    return ScaffoldPage(
+      content: Column(
         children: [
           // Header
           GlassContainer(
@@ -61,7 +61,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       Text('Back'),
                     ],
                   ),
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: widget.onBack ?? () => Navigator.pop(context),
                 ),
                 const SizedBox(width: 16),
                 Text(

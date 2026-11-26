@@ -19,7 +19,7 @@ class NoteService {
     );
     return rows.map((r) => Note.fromJson({
           ...r,
-          'isPinned': r['is_pinned'],
+          'isPinned': r['is_pinned'] == 1,
           'tags': jsonDecode(r['tags'] as String? ?? '[]'),
           'createdAt': r['created_at'],
           'updatedAt': r['updated_at'],
@@ -74,7 +74,7 @@ class NoteService {
     );
     return rows.map((r) => TodoItem.fromJson({
           ...r,
-          'isCompleted': r['is_completed'],
+          'isCompleted': r['is_completed'] == 1,
           'dueDate': r['due_date'],
           'sortOrder': r['sort_order'],
           'profileId': r['profile_id'],

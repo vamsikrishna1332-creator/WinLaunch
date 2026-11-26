@@ -5,7 +5,6 @@ import '../models/schedule_model.dart';
 import '../models/app_shortcut_model.dart';
 import '../models/widget_config_model.dart';
 import '../models/note_model.dart';
-import '../models/user_profile_model.dart';
 import '../services/settings_service.dart';
 import '../services/theme_service.dart';
 import '../services/schedule_service.dart';
@@ -13,6 +12,7 @@ import '../services/launcher_service.dart';
 import '../services/widget_service.dart';
 import '../services/system_info_service.dart';
 import '../services/note_service.dart';
+export '../services/system_info_service.dart' show SystemSnapshot;
 
 // ─── Services (singletons) ────────────────────────────────────────────────────
 
@@ -369,5 +369,3 @@ final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoItem>>((ref) {
   return TodoNotifier(ref.read(noteServiceProvider));
 });
 
-// Re-export SystemSnapshot
-export '../services/system_info_service.dart' show SystemSnapshot;
