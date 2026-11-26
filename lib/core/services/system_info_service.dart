@@ -55,7 +55,7 @@ class SystemInfoService {
 
     try {
       final result = await _connectivity.checkConnectivity();
-      isOnline = result != ConnectivityResult.none;
+      isOnline = result.any((type) => type != ConnectivityResult.none);
     } catch (_) {}
 
     return SystemSnapshot(
