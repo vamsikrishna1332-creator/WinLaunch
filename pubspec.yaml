@@ -38,7 +38,7 @@ dependencies:
   disk_space_plus: ^0.2.6
 
   # File operations
-  file_picker: ^6.1.1
+  file_picker: ^10.3.10
   path_provider: ^2.1.2
   path: ^1.8.3
 
