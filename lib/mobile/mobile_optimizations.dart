@@ -160,6 +160,34 @@ class MobileOptimizationService {
     return before > after ? before - after : 0;
   }
 
+
+  /// Launchable apps only. Uses Android's launcher-intent visibility query.
+  Future<List<InstalledMobileApp>> installedApps() async {
+    if (!Platform.isAndroid) return const [];
+    try {
+      final items = await _channel.invokeMethod<List<dynamic>>('listApps');
+      if (items == null) return const [];
+      return items.whereType<Map>().map((item) => InstalledMobileApp(
+        name: item['name']?.toString() ?? '',
+        packageName: item['package']?.toString() ?? '',
+      )).where((item) => item.name.isNotEmpty && item.packageName.isNotEmpty)
+          .toList();
+    } catch (_) {
+      return const [];
+    }
+  }
+
+  Future<bool> launchPackage(String packageName) async {
+    if (!Platform.isAndroid) return false;
+    try {
+      return await _channel.invokeMethod<bool>(
+        'launchPackage', <String, String>{'package': packageName},
+      ) ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
   /// Opens official Android settings panels; does not silently change settings.
   Future<bool> openAndroidSettings(String destination) async {
     if (!Platform.isAndroid) return false;
@@ -180,4 +208,10 @@ String formatCacheBytes(int bytes) {
     return (bytes / 1024).toStringAsFixed(1) + ' KB';
   }
   return (bytes / (1024 * 1024)).toStringAsFixed(1) + ' MB';
+}
+
+class InstalledMobileApp {
+  final String name;
+  final String packageName;
+  const InstalledMobileApp({required this.name, required this.packageName});
 }
