@@ -1,7 +1,8 @@
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart' as mobile;
+import 'dart:io' show Platform, Directory;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -20,7 +21,10 @@ class DatabaseHelper {
     final dbDir = Directory('${appDir.path}/LaunchDesk');
     if (!await dbDir.exists()) await dbDir.create(recursive: true);
     final path = join(dbDir.path, filePath);
-    return await databaseFactoryFfi.openDatabase(
+    final factory = (Platform.isAndroid || Platform.isIOS)
+        ? mobile.databaseFactory
+        : databaseFactoryFfi;
+    return await factory.openDatabase(
       path,
       options: OpenDatabaseOptions(
         version: 1,
