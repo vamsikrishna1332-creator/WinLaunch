@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/providers/app_providers.dart';
@@ -49,11 +48,6 @@ class _NoticeBarState extends ConsumerState<NoticeBar>
     _controller.repeat();
   }
 
-  void _restart() {
-    _measured = false;
-    _controller.stop();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
-  }
 
   @override
   void dispose() {

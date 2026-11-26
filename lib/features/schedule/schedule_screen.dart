@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import '../../core/models/schedule_model.dart';
@@ -152,7 +152,7 @@ class _ScheduleCard extends ConsumerWidget {
                           color: Colors.green.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: const Text('RUNNING',
+                        child: Text('RUNNING',
                             style: TextStyle(
                                 color: Colors.green,
                                 fontSize: 9,
@@ -196,7 +196,7 @@ class _ScheduleCard extends ConsumerWidget {
                   const SizedBox(height: 8),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: LinearProgressIndicator(
+                    child: material.LinearProgressIndicator(
                       value: s.progress,
                       backgroundColor: Colors.white.withOpacity(0.1),
                       valueColor: AlwaysStoppedAnimation<Color>(Color(s.color)),
