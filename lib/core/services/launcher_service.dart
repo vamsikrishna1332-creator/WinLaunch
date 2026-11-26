@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';
+import '../../mobile/mobile_optimizations.dart';
 import 'package:uuid/uuid.dart';
 import '../models/app_shortcut_model.dart';
 import '../database/database_helper.dart';
@@ -159,6 +160,18 @@ class LauncherService {
       bool success = false;
       switch (shortcut.type) {
         case ShortcutType.app:
+          if (Platform.isAndroid) {
+            success = await MobileOptimizationService.instance
+                .launchPackage(shortcut.target);
+            break;
+          }
+          if (Platform.isWindows) {
+            await Process.start('explorer', [shortcut.target]);
+            success = true;
+          } else {
+            success = await launchUrl(Uri.file(shortcut.target));
+          }
+          break;
         case ShortcutType.file:
         case ShortcutType.folder:
           if (Platform.isWindows) {
@@ -174,8 +187,11 @@ class LauncherService {
           success = await launchUrl(uri, mode: LaunchMode.externalApplication);
           break;
         case ShortcutType.command:
-          await Process.run('cmd', ['/c', shortcut.target]);
-          success = true;
+          if (Platform.isWindows) {
+            await Process.run('cmd', ['/c', shortcut.target]);
+            success = true;
+          }
+          // Desktop-only commands are deliberately not executed on Android.
           break;
       }
       if (success) {
