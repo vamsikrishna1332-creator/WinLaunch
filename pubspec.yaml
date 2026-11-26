@@ -24,9 +24,6 @@ dependencies:
   drift: ^2.14.1
   sqlite3_flutter_libs: ^0.5.18
 
-  # Secure local login hash used by Windows redesign
-  crypto: ^3.0.3
-
   # JSON / Config
   json_annotation: ^4.8.1
   shared_preferences: ^2.2.2
