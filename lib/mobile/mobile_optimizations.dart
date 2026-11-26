@@ -54,7 +54,8 @@ class MobileOptimizationService {
 
     try {
       networkConnected =
-          (await _connectivity.checkConnectivity()) != ConnectivityResult.none;
+          (await _connectivity.checkConnectivity())
+              .any((type) => type != ConnectivityResult.none);
     } catch (_) {}
 
     final memory = await _readMemory();
