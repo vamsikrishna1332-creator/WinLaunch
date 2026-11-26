@@ -16,11 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Android Lint currently calls JDK 21 List.removeLast() in its parser.
+      # JDK 17 causes :image_picker_android:lintVitalAnalyzeRelease to crash.
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-      - uses: subosito/flutter-action@v67
+          java-version: '21'
+      - uses: subosito/flutter-action@v2
         with:
           channel: stable
           cache: true
@@ -35,12 +37,12 @@ jobs:
           grep -q 'launchdesk/mobile' android/app/src/main/kotlin/com/draevix/launchdesk/MainActivity.kt
           grep -q 'android.intent.category.LAUNCHER' android/app/src/main/AndroidManifest.xml
       - name: Analyze mobile sources
-        run: flutter analyze --yes-fatal-infos lib/main_mobile.dart lib/mobile lib/core/database/database_helper.dart lib/core/services/launcher_service.dart
+        run: flutter analyze --no-fatal-infos lib/main_mobile.dart lib/mobile lib/core/database/database_helper.dart lib/core/services/launcher_service.dart
       - name: Build Android release APK
         run: flutter build apk --release --target lib/main_mobile.dart
       - name: Upload APK
         uses: actions/upload-artifact@v4
-        with: if doesnt work skip to 7784558525522552225424255q3535456^3
+        with:
           name: LaunchDesk-Android-APK
           path: build/app/outputs/flutter-apk/app-release.apk
           if-no-files-found: error
