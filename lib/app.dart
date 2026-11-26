@@ -91,7 +91,7 @@ class _AppShell extends ConsumerWidget {
       children: [
         // Animated background
         if (themeState.backgroundType == BackgroundType.color)
-          Container(color: themeState.backgroundColor),
+          Container(color: Color(themeState.backgroundColor)),
 
         if (themeState.backgroundType == BackgroundType.gradient)
           Container(
@@ -99,7 +99,7 @@ class _AppShell extends ConsumerWidget {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: themeState.gradientColors,
+                colors: themeState.gradientColors.map((value) => Color(value)).toList(),
               ),
             ),
           ),
@@ -111,7 +111,7 @@ class _AppShell extends ConsumerWidget {
               themeState.backgroundImagePath!,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => Container(
-                color: themeState.backgroundColor,
+                color: Color(themeState.backgroundColor),
               ),
             ),
           ),
@@ -119,7 +119,7 @@ class _AppShell extends ConsumerWidget {
         // Particle effect overlay
         if (themeState.enableParticles)
           Positioned.fill(
-            child: ParticleOverlay(config: themeState.particleConfig),
+            child: ParticleOverlay(config: ParticleConfig.fromJson(themeState.particleConfig)),
           ),
 
         // Main content
@@ -139,7 +139,7 @@ class ErrorScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(FluentIcons.error, size: 64, color: Colors.red),
+            Icon(FluentIcons.error, size: 64, color: Colors.red),
             const SizedBox(height: 16),
             const Text('Failed to load LaunchDesk settings.',
                 style: TextStyle(fontSize: 18)),
