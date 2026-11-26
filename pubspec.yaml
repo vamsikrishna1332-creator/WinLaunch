@@ -1,5 +1,5 @@
 name: launchdesk
-description: LaunchDesk - Professional Windows Productivity Launcher
+description: LaunchDesk - Windows and Android productivity launcher
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -23,6 +23,9 @@ dependencies:
   sqflite: ^2.3.2
   drift: ^2.14.1
   sqlite3_flutter_libs: ^0.5.18
+
+  # Secure local login hash used by Windows redesign
+  crypto: ^3.0.3
 
   # JSON / Config
   json_annotation: ^4.8.1
