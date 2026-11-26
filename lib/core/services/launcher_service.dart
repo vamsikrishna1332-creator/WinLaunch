@@ -23,8 +23,8 @@ class LauncherService {
     );
     return rows.map((r) => AppShortcut.fromJson({
           ...r,
-          'isFavorite': r['is_favorite'],
-          'isPinned': r['is_pinned'],
+          'isFavorite': r['is_favorite'] == 1,
+          'isPinned': r['is_pinned'] == 1,
           'sortOrder': r['sort_order'],
           'lastOpened': r['last_opened'],
           'openCount': r['open_count'],
@@ -115,7 +115,7 @@ class LauncherService {
     );
     return rows.map((r) => ShortcutGroup.fromJson({
           ...r,
-          'isExpanded': r['is_expanded'],
+          'isExpanded': r['is_expanded'] == 1,
           'sortOrder': r['sort_order'],
           'iconPath': r['icon_path'],
           'profileId': r['profile_id'],
