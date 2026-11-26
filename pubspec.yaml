@@ -33,7 +33,7 @@ dependencies:
 
   # System info
   system_info2: ^3.0.2
-  battery_plus: ^5.0.3
+  battery_plus: ^6.2.3
   connectivity_plus: ^5.0.2
   disk_space_plus: ^0.2.6
 
