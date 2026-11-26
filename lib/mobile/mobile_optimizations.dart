@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:battery_plus/battery_plus.dart';
@@ -30,7 +29,7 @@ class MobileMetrics {
   double? get memoryPercent => totalMemoryMB == null ||
           totalMemoryMB == 0 || usedMemoryMB == null
       ? null
-      : (usedMemoryMB! / totalMemoryMB! * 100).clamp(0.0, 100.0);
+      : (usedMemoryMB! / totalMemoryMB! * 100).clamp(0.0, 100.0).toDouble();
 }
 
 class MobileOptimizationService {
@@ -122,7 +121,7 @@ class MobileOptimizationService {
     final idleDelta = (second[3] + second[4]) - (first[3] + first[4]);
     if (totalDelta <= 0) return null;
     return ((totalDelta - idleDelta) / totalDelta * 100)
-        .clamp(0.0, 100.0);
+        .clamp(0.0, 100.0).toDouble();
   }
 
   Future<int> measureOwnCache() async {
